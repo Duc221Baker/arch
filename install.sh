@@ -4,13 +4,17 @@ set -e # Dừng lại ngay lập tức nếu có bất kỳ lệnh nào bị l�
 echo "=== 1. Cập nhật thời gian ==="
 timedatectl set-ntp true
 
+swapoff -a
+
 DISK="/dev/nvme0n1"
 PART_BOOT="${DISK}p1"
 PART_ROOT="${DISK}p2"
 
 echo "=== 2. Phân vùng ổ đĩa ($DISK) ==="
+
+
 # Xoá chữ ký cũ để tránh bị fdisk hỏi xác nhận
-wipefs -a "$DISK"
+wipefs -af "$DISK"
 
 # Chia ổ bằng sfdisk: p1 (1GiB EFI), p2 (toàn bộ còn lại - Root x86-64)
 sfdisk "$DISK" <<EOF
@@ -24,7 +28,7 @@ mkfs.fat -F 32 "$PART_BOOT"
 mkfs.ext4 -F "$PART_ROOT"
 
 mount "$PART_ROOT" /mnt
-mount --mkdir "$PART_BOOT" /mnt/boot
+mount --mkdir -o fmask=0077,dmask=0077 "$PART_BOOT" /mnt/boot
 
 echo "=== 4. Cài đặt gói cơ bản (pacstrap) ==="
 # Cài luôn intel-ucode, nano, networkmanager ở đây để tiết kiệm thời gian
@@ -58,14 +62,6 @@ title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /intel-ucode.img
 initrd  /initramfs-linux.img
-options root=UUID=${ROOT_UUID} rw
-EOF
-
-cat << EOF > /mnt/boot/loader/entries/arch-fallback.conf
-title   Arch Linux (fallback)
-linux   /vmlinuz-linux
-initrd  /intel-ucode.img
-initrd  /initramfs-linux-fallback.img
 options root=UUID=${ROOT_UUID} rw
 EOF
 
