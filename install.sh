@@ -33,7 +33,7 @@ mount --mkdir -o fmask=0077,dmask=0077 "$PART_BOOT" /mnt/boot
 
 echo "=== 4. Cài đặt gói cơ bản (pacstrap) ==="
 
-pacstrap -K /mnt base linux linux-firmware
+pacstrap -K /mnt base linux linux-firmware intel-ucode
 
 echo "=== 5. Tạo fstab ==="
 genfstab -U /mnt >> /mnt/etc/fstab
