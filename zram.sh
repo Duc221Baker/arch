@@ -6,7 +6,7 @@ set -e
 sudo pacman -S --needed --noconfirm zram-generator
 
 # Configure ZRAM
-cat > /etc/systemd/zram-generator.conf << 'EOF'
+sudo tee /etc/systemd/zram-generator.conf > /dev/null << 'EOF'
 [zram0]
 zram-size = 8192
 compression-algorithm = zstd
@@ -15,7 +15,7 @@ fs-type = swap
 EOF
 
 # Configure sysctl
-sudo cat > /etc/sysctl.d/99-swappiness.conf << 'EOF'
+sudo tee /etc/sysctl.d/99-swappiness.conf > /dev/null << 'EOF'
 vm.swappiness = 180
 vm.watermark_boost_factor = 0
 vm.watermark_scale_factor = 125
