@@ -14,7 +14,8 @@ echo "=== 2. Phân vùng ổ đĩa ($DISK) ==="
 
 
 # remove all partition
-wipefs -af "$DISK"
+sgdisk --zap-all "$DISK"
+partprobe "$DISK"
 
 # Chia ổ bằng sfdisk: p1 (1GiB EFI), p2 (toàn bộ còn lại - Root x86-64)
 sfdisk "$DISK" <<EOF
@@ -70,7 +71,6 @@ arch-chroot -S /mnt bash -c '
     ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
     hwclock --systohc
     locale-gen
-    systemctl enable NetworkManager
     bootctl install
     bootctl list
 '
