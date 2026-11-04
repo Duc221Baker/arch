@@ -31,8 +31,8 @@ mount "$PART_ROOT" /mnt
 mount --mkdir -o fmask=0077,dmask=0077 "$PART_BOOT" /mnt/boot
 
 echo "=== 4. Cài đặt gói cơ bản (pacstrap) ==="
-# Cài luôn intel-ucode, nano, networkmanager ở đây để tiết kiệm thời gian
-pacstrap -K /mnt base linux linux-firmware intel-ucode nano networkmanager
+
+pacstrap -K /mnt base linux linux-firmware
 
 echo "=== 5. Tạo fstab ==="
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -74,13 +74,3 @@ arch-chroot -S /mnt bash -c '
     bootctl install
     bootctl list
 '
-
-echo "=========================================="
-echo ">>> VUI LÒNG NHẬP MẬT KHẨU ROOT DƯỚI ĐÂY <<<"
-echo "=========================================="
-arch-chroot -S /mnt passwd
-
-echo "=== Cài đặt hoàn tất! Đang khởi động lại... ==="
-umount -R /mnt
-reboot
-
