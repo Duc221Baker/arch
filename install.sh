@@ -13,7 +13,7 @@ PART_ROOT="${DISK}p2"
 echo "=== 2. Phân vùng ổ đĩa ($DISK) ==="
 
 
-# Xoá chữ ký cũ để tránh bị fdisk hỏi xác nhận
+# remove all partition
 wipefs -af "$DISK"
 
 # Chia ổ bằng sfdisk: p1 (1GiB EFI), p2 (toàn bộ còn lại - Root x86-64)
