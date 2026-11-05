@@ -12,8 +12,8 @@ rm -rf ~/.cache/thumbnails
 mkdir -p ~/.cache/thumbnails
 
 # Mesa
-rm -rf ~/.cache/mesa_shader_cache ~/.cache/mesa_shader_cache_db
-mkdir -p ~/.cache/mesa_shader_cache ~/.cache/mesa_shader_cache_db
+rm -rf ~/.cache/mesa_shader_cache
+mkdir -p ~/.cache/mesa_shader_cache
 
 # Fontconfig
 rm -rf ~/.cache/fontconfig
