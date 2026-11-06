@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Google
 rm -rf ~/.cache/Google
