@@ -12,3 +12,5 @@ AllowHibernation=no
 AllowHybridSleep=no
 AllowSuspendThenHibernate=no
 EOF
+
+echo "Success. Please reboot to apply changes."
