@@ -88,7 +88,6 @@ tmpfs   /home/duc/.cache/kitty   tmpfs   noatime,nosuid,nodev,mode=700,uid=1000,
 
 # ImageMagick
 tmpfs   /home/duc/.cache/ImageMagick   tmpfs   noatime,nosuid,nodev,mode=700,uid=1000,gid=1000,size=256M   0 0
-
 EOF
 
 echo "Success. Please reboot to apply changes."
