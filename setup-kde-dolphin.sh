@@ -2,7 +2,7 @@
 
 set -e
 
-cat >> ~/.config/kdeglobals <<'EOF'
+cat > ~/.config/kdeglobals <<'EOF'
 [General]
 TerminalApplication=kitty
 TerminalManager=kitty
