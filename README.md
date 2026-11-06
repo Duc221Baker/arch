@@ -55,6 +55,7 @@ gap = 0
 sudo reboot  
 ## Install apps
 cd ~/arch  
+./xdg-portal.sh  
 ./install-cloud-flare-warp.sh  
 ./install-apps.sh  
 ./setup-kde-dolphin.sh  
