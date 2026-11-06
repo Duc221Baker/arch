@@ -1,5 +1,5 @@
 ## Install arch
-Connect wifi  
+**Connect wifi**  
 curl -LO https://raw.githubusercontent.com/Duc221Baker/arch/refs/heads/main/arch-install.sh  
 bash arch-install.sh  
 arch-chroot /mnt  
