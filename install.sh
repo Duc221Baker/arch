@@ -1,7 +1,7 @@
 #!/bin/bash
-set -e # Dừng lại ngay lập tức nếu có bất kỳ lệnh nào bị lỗi
+set -e
 
-echo "=== 1. Cập nhật thời gian ==="
+echo "=== 1. Sync system time ==="
 timedatectl set-ntp true
 
 swapoff -a
@@ -10,45 +10,48 @@ DISK="/dev/nvme0n1"
 PART_BOOT="${DISK}p1"
 PART_ROOT="${DISK}p2"
 
-echo "=== 2. Phân vùng ổ đĩa ($DISK) ==="
+echo "=== 2. Partition disk ($DISK) ==="
 
-
-# remove all partition
+# Remove existing partition table and signatures
 sgdisk --zap-all "$DISK"
-partprobe "$DISK"
+wipefs -af "$DISK"
 
-# Chia ổ bằng sfdisk: p1 (1GiB EFI), p2 (toàn bộ còn lại - Root x86-64)
+# Notify kernel
+partprobe "$DISK"
+udevadm settle
+
+# Create GPT partitions: 1 GiB EFI and remaining space for root
 sfdisk "$DISK" <<EOF
 label: gpt
-size=1G, type=U
+size=1G, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B
 type=4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709
 EOF
 
-echo "=== 3. Định dạng và Mount phân vùng ==="
+echo "=== 3. Format and mount partitions ==="
 mkfs.fat -F 32 "$PART_BOOT"
-mkfs.ext4 -F "$PART_ROOT"
+mkfs.ext4 "$PART_ROOT"
 
 mount "$PART_ROOT" /mnt
 mount --mkdir -o fmask=0077,dmask=0077 "$PART_BOOT" /mnt/boot
 
-echo "=== 4. Cài đặt gói cơ bản (pacstrap) ==="
+echo "=== 4. Install base packages ==="
 
 pacstrap -K /mnt base linux linux-firmware intel-ucode
 
-echo "=== 5. Tạo fstab ==="
+echo "=== 5. Generate fstab ==="
 genfstab -U /mnt >> /mnt/etc/fstab
 
-echo "=== 6. Cấu hình hệ thống bên trong chroot ==="
+echo "=== 6. Configure system ==="
 ROOT_UUID=$(blkid -s UUID -o value "$PART_ROOT")
 
-echo "=== 6. Ghi các file cấu hình hệ thống ==="
-# Ghi cấu hình Locale, Console, Hostname trực tiếp vào /mnt
+echo "=== 7. Write system configuration files ==="
+# Configure locale, console keymap, and hostname
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 echo "KEYMAP=us" > /mnt/etc/vconsole.conf
 echo "Duc221Baker" > /mnt/etc/hostname
 sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /mnt/etc/locale.gen
 
-# Tạo cấu hình Bootloader (systemd-boot)
+# Configure systemd-boot
 mkdir -p /mnt/boot/loader/entries
 
 cat << 'EOF' > /mnt/boot/loader/loader.conf
@@ -66,11 +69,21 @@ initrd  /initramfs-linux.img
 options root=UUID=${ROOT_UUID} rw
 EOF
 
-echo "=== 7. Thực thi cấu hình bên trong chroot ==="
-arch-chroot -S /mnt bash -c '
+echo "=== 8. Apply configuration inside chroot ==="
+arch-chroot /mnt bash -c '
     ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
     hwclock --systohc
     locale-gen
+    pacman -S networkmanager sudo
+    systemctl enable NetworkManager
+
+    passwd
+'
+
+arch-chroot -S /mnt bash -c '
     bootctl install
     bootctl list
 '
+
+umount -R /mnt
+reboot
