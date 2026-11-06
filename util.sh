@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 sudo pacman -S --needed power-profiles-daemon
 sudo systemctl enable --now power-profiles-daemon
