@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-# 1. Blacklist module NVIDIA và Nouveau
 mkdir -p /etc/modprobe.d
 
 cat <<'EOF' > /etc/modprobe.d/blacklist-nvidia.conf
@@ -27,7 +26,6 @@ alias nvidia_current_modeset off
 alias i2c_nvidia_gpu off
 EOF
 
-# 2. Tạo udev rule tự động gỡ bỏ card NVIDIA khi khởi động
 mkdir -p /etc/udev/rules.d
 
 cat <<'EOF' > /etc/udev/rules.d/50-remove-nvidia.rules
@@ -44,7 +42,6 @@ ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300"
 ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
 EOF
 
-# 3. Tạo lại initramfs
 mkinitcpio -P
 
-echo "NVIDIA đã bị chặn thành công! Hãy thoát chroot và reboot máy."
+echo "nvidia blocked! Please reboot."
