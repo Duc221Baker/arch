@@ -85,6 +85,3 @@ arch-chroot -S /mnt bash -c '
     bootctl install
     bootctl list
 '
-
-umount -R /mnt
-reboot
