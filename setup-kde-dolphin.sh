@@ -1,28 +1,24 @@
-
 #!/bin/bash
 
 set -e
 
-mkdir -p ~/.config
-
 cat >> ~/.config/kdeglobals <<'EOF'
-
 [General]
 TerminalApplication=kitty
 TerminalManager=kitty
 EOF
 
-# Installing archlinux-xdg-menu
+# Install archlinux-xdg-menu
 sudo pacman -S --needed --noconfirm archlinux-xdg-menu
 
-# Updating desktop database
+# Update desktop database
 sudo update-desktop-database
 
 # Setting up application menu
 mkdir -p ~/.config/menus
 cp /etc/xdg/menus/arch-applications.menu ~/.config/menus/applications.menu
 
-# Creating pacman hook
+# Add pacman hook
 sudo mkdir -p /etc/pacman.d/hooks
 
 sudo tee /etc/pacman.d/hooks/kservice.hook > /dev/null <<'EOF'
