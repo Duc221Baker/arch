@@ -2,8 +2,6 @@
 
 set -e
 
-#!/bin/bash
-
 sudo mkdir -p /etc/modprobe.d
 
 sudo tee /etc/modprobe.d/blacklist-nvidia.conf > /dev/null <<'EOF'
