@@ -17,18 +17,19 @@ echo "=== 2. Partition disk ($DISK) ==="
 sgdisk --zap-all "$DISK"
 wipefs -af "$DISK"
 
-# Notify kernel
-partprobe "$DISK"
-udevadm settle
-
 # Create GPT partitions: 1 GiB EFI and remaining space for root
-sfdisk "$DISK" <<EOF
+sfdisk --wipe-partitions always "$DISK" <<EOF
 label: gpt
 size=1G, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B
 type=4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709
 EOF
 
-echo "=== 3. Format and mount partitions ==="
+# Notify kernel
+partprobe "$DISK"
+udevadm settle
+
+echo "=== 3. Format and moun
+t partitions ==="
 mkfs.fat -F 32 "$PART_BOOT"
 mkfs.ext4 "$PART_ROOT"
 
