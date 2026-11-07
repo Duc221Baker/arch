@@ -75,7 +75,7 @@ arch-chroot /mnt bash -c '
     ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
     hwclock --systohc
     locale-gen
-    pacman -S networkmanager sudo
+    pacman -S --noconfirm networkmanager sudo
     systemctl enable NetworkManager
 
     passwd
