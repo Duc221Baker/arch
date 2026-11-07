@@ -33,7 +33,7 @@ cd arch
 ./cache-ram.sh  
 ./zram.sh  
 sudo reboot  
-## Install & Configure Noctalia Greeter Umbriel & Fonts
+## Install & Configure Noctalia Greeter Umbriel & Fonts & Audio
 cd ~/arch  
 ./install-noctalia-umbriel-greeter.sh  
 nano ~/.config/umbriel/config.toml  
@@ -52,6 +52,7 @@ gap = 0
 "Mod+T" = { action = "window-toggle-floating", repeat = false }  to Mod + V  
 "Mod+Shift+T" = { action = "window-focus-switch-floating", repeat = false }  to Mod+Shift+V  
 </i>
+./setup-pipewire-audio.sh  
 ./install-fonts.sh  
 sudo reboot  
 ## Gnome-keyring
