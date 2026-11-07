@@ -59,7 +59,7 @@ sudo reboot
 cd ~/arch  
 ./install-gnome-keyring.sh  
 sudo reboot  
-## Install apps
+## Install & Configure apps
 cd ~/arch  
 ./xdg-portal.sh  
 ./install-cloud-flare-warp.sh  
