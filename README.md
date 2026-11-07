@@ -21,7 +21,7 @@ passwd *username*
 usermod -aG wheel *username*  
 sudo EDITOR=nano visudo  
 **Uncomment** *%wheel ALL=(ALL:ALL) ALL*  
-
+**Logout and login with regular user**  
 ## Configure system
 sudo pacman -Syu  
 git clone https://github.com/Duc221Baker/arch  
@@ -54,12 +54,15 @@ gap = 0
 </i>
 ./install-fonts.sh  
 sudo reboot  
+## Gnome-keyring
+cd ~/arch  
+./install-gnome-keyring.sh  
+sudo reboot  
 ## Install apps
 cd ~/arch  
 ./xdg-portal.sh  
 ./install-cloud-flare-warp.sh  
 ./install-apps.sh  
 ./setup-kde-dolphin.sh  
-./install-gnome-keyring.sh  
 ./util.sh  
 sudo reboot  
