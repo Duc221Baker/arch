@@ -28,8 +28,7 @@ EOF
 partprobe "$DISK"
 udevadm settle
 
-echo "=== 3. Format and moun
-t partitions ==="
+echo "=== 3. Format and mount partitions ==="
 mkfs.fat -F 32 "$PART_BOOT"
 mkfs.ext4 "$PART_ROOT"
 
