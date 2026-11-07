@@ -39,6 +39,6 @@ sudo pacman -S --needed flatpak
 sudo pacman -S --needed foliate
 
 # Audio Controller
-sudo pacman -S -- needed pavucontrol
+sudo pacman -S --needed pavucontrol
 
 echo "Success."
