@@ -1,10 +1,10 @@
 ## Install arch
 **Connect internet first**  
 **Install**  
-curl -LO https://raw.githubusercontent.com/Duc221Baker/arch/refs/heads/main/arch-install.sh  
+curl -fLO https://raw.githubusercontent.com/Duc221Baker/arch/refs/heads/main/arch-install.sh  
 bash arch-install.sh  
 arch-chroot /mnt  
-curl -LO https://raw.githubusercontent.com/Duc221Baker/arch/refs/heads/main/root-block-nvidia.sh  
+curl -fLO https://raw.githubusercontent.com/Duc221Baker/arch/refs/heads/main/root-block-nvidia.sh  
 bash root-block-nvidia.sh  
 rm root-block-nvidia.sh  
 exit  
@@ -16,7 +16,6 @@ nmcli device wifi connect *SSID* password *PASSWORD*
 nmcli connection modify *SSID* connection.autoconnect yes  
 
 ## Configure user
-pacman -S nano fastfetch  
 useradd -m *username*  
 passwd *username*  
 usermod -aG wheel *username*  
@@ -35,6 +34,7 @@ cd arch
 ./zram.sh  
 sudo reboot  
 ## Install & Configure Noctalia Greeter Umbriel & Fonts
+cd ~/arch  
 ./install-noctalia-umbriel-greeter.sh  
 nano ~/.config/umbriel/config.toml  
 <i>
