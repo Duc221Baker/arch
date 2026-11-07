@@ -33,7 +33,7 @@ cd arch
 ./cache-ram.sh  
 ./zram.sh  
 sudo reboot  
-## Install & Configure Noctalia Greeter Umbriel & Fonts & Audio
+## Install & Configure Noctalia Greeter Umbriel Fonts Audio
 cd ~/arch  
 ./install-noctalia-umbriel-greeter.sh  
 nano ~/.config/umbriel/config.toml  
