@@ -75,9 +75,9 @@ arch-chroot /mnt bash -c '
     ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
     hwclock --systohc
     locale-gen
-    pacman -S --noconfirm networkmanager sudo
+    pacman -S --noconfirm networkmanager sudo nano fastfetch git base-devel
     systemctl enable NetworkManager
-
+    echo "=== Enter root password ==="
     passwd
 '
 
