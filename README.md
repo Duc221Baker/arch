@@ -67,3 +67,6 @@ cd ~/arch
 ./setup-kde-dolphin.sh  
 ./util.sh  
 sudo reboot  
+## Install apps flatpak
+cd ~/arch  
+./install-apps-flatpak.sh  
