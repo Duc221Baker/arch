@@ -30,7 +30,7 @@ udevadm settle
 
 echo "=== 3. Format and mount partitions ==="
 mkfs.fat -F 32 "$PART_BOOT"
-mkfs.ext4 "$PART_ROOT"
+mkfs.ext4 -m 0 "$PART_ROOT"
 
 mount "$PART_ROOT" /mnt
 mount --mkdir -o fmask=0077,dmask=0077 "$PART_BOOT" /mnt/boot
