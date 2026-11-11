@@ -24,7 +24,7 @@ yay -S --needed ungoogled-chromium-bin
 yay -S --needed vesktop-bin
 
 # Telegram
-sudo pacman -S telegram-desktop
+sudo pacman -S --needed telegram-desktop
 
 # qBittorrent
 sudo pacman -S --needed qbittorrent
