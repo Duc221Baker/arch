@@ -25,6 +25,7 @@ sudo EDITOR=nano visudo
 ## Configure system
 sudo pacman -Syu  
 git clone https://github.com/Duc221Baker/arch  
+git clone https://github.com/Duc221Baker/umbriel-config  
 chmod +x ~/arch/*.sh  
 cd arch  
 ./install-yay.sh  
@@ -36,22 +37,7 @@ sudo reboot
 ## Install & Configure Noctalia Greeter Umbriel Fonts Audio
 cd ~/arch  
 ./install-noctalia-umbriel-greeter.sh  
-nano ~/.config/umbriel/config.toml  
-<i>
-[general]  
-autostart = [  
-    "noctalia"  
-]  
-[layout]  
-mode = "scrolling"  
-gap = 0  
-[keybinds]  
-\# Applications and session  
-"Mod+T" = { action = "spawn kitty", repeat = false }  
-**Change**  
-"Mod+T" = { action = "window-toggle-floating", repeat = false }  to Mod + V  
-"Mod+Shift+T" = { action = "window-focus-switch-floating", repeat = false }  to Mod+Shift+V  
-</i>
+cp ~/umbriel-config/* ~/.config/umbriel/  
 ./setup-pipewire-audio.sh  
 ./install-fonts.sh  
 sudo reboot  
