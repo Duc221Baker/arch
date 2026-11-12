@@ -22,3 +22,7 @@ sudo pacman -S --needed lm_sensors
 sudo sensors-detect --auto
 
 sudo systemctl enable --now fstrim.timer
+
+sudo pacman -S --needed less
+
+echo "Success."
