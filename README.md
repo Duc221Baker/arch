@@ -4,6 +4,9 @@
 curl -fLO https://raw.githubusercontent.com/Duc221Baker/arch/refs/heads/main/arch-install.sh  
 bash arch-install.sh  
 arch-chroot /mnt  
+**Set root password**  
+passwd  
+**Block nvidia**  
 curl -fLO https://raw.githubusercontent.com/Duc221Baker/arch/refs/heads/main/root-block-nvidia.sh  
 bash root-block-nvidia.sh  
 rm root-block-nvidia.sh  
