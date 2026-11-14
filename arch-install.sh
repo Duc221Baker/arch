@@ -77,8 +77,6 @@ arch-chroot /mnt bash -c '
     locale-gen
     pacman -S --noconfirm networkmanager sudo nano fastfetch git base-devel
     systemctl enable NetworkManager
-    echo "=== Enter root password ==="
-    passwd
 '
 
 arch-chroot -S /mnt bash -c '
