@@ -18,7 +18,7 @@ sudo sed -i 's/^#\?HandlePowerKey=.*/HandlePowerKey=ignore/' /etc/systemd/logind
 
 sudo pacman -S --needed intel-gpu-tools
 
-sudo pacman -S --needed lm_sensors
+sudo pacman -S --needed lm_sensors smartmontools
 sudo sensors-detect --auto
 
 sudo systemctl enable --now fstrim.timer
