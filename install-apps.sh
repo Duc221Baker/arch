@@ -3,7 +3,7 @@
 set -e
 
 # File manager
-sudo pacman -S --needed dolphin ark 7zip unrar
+sudo pacman -S --needed ark 7zip unrar
 
 # Text Editor & Dev
 sudo pacman -S --needed kate
