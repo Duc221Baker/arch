@@ -4,6 +4,7 @@ set -e
 
 # File manager
 sudo pacman -S --needed ark 7zip unrar
+yay -S --needed luciole-git
 
 # Text Editor & Dev
 sudo pacman -S --needed kate
